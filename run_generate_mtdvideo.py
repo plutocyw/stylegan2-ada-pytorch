@@ -9,6 +9,7 @@ import cv2
 import numpy as np
 import PIL.Image
 import scipy as sp
+import torch
 from tqdm import tqdm
 
 import dnnlib
@@ -42,7 +43,7 @@ def generate_mtd_video(
     os.makedirs(outdir, exist_ok=True)
     print('Loading networks from "%s"...' % network_pkl)
     with dnnlib.util.open_url(network_pkl) as fp:
-        _G, _D, Gs = pickle.load(fp)
+        _G, _D, Gs = torch.load(fp)
 
     Gs_kwargs = dnnlib.EasyDict()
     Gs_kwargs.randomize_noise = False
